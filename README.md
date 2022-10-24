@@ -29,5 +29,26 @@ Containers are here and Kubernetes is the de facto platform for running and mana
 - docker image push vsvale/getting-started-k8s:1.0
 - docker image push vsvale/getting-started-k8s:2.0
 
-### apply yamls
-- pod: kubectl apply -f ./yamls/pod.yml
+### Pod
+- apply pod: kubectl apply -f ./yamls/pod.yml
+- watch pod: kubectl get pods --watch
+- describe pod: kubectl descrive pods hello-pod
+
+### Pod with sidecar
+- apply pod: kubectl apply -f ./yamls/multi-pod.yml
+
+### Services
+- imperative expose: kubectl expose pod hello-pod --name=hello-svc --target-port=8080 --type=NodePort
+- delete service: kubectl delete svc hello-svc
+- declarative expose: kubectl apply -f ./yamls/svc-nodeport.yml
+- load balancer for hello-pod:kubectl apply -f ./yamls/svc-lb.yml
+
+### Deployments
+- kubectl apply -f ./yamls/deploy.yml
+- kubectl get deploy
+- kubect get rs
+- kubect get pods
+
+### Rolling Updates
+- up 1 pod after 5 seconds terminate an old one
+- kubectl apply -f ./yamls/deploy-complete.yml
